@@ -4,15 +4,19 @@ import { expect, it } from "vitest";
 import { z } from "zod";
 //       ^ 🕵️‍♂️
 
+const numberSchema = z.number({
+  invalid_type_error: "Expected number, received string",
+});
 export const toString = (num: unknown) => {
-  return String(num);
+  const validatedNum = numberSchema.parse(num);
+  return String(validatedNum);
 };
 
 // TESTS
 
 it("Should throw a runtime error when called with not a number", () => {
   expect(() => toString("123")).toThrowError(
-    "Expected number, received string",
+    "Expected number, received string"
   );
 });
 

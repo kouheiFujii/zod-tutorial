@@ -17,9 +17,7 @@ const doesStarWarsPersonExist = async (id: string) => {
 };
 
 const Form = z.object({
-  id: z.string().refine(async (id) => doesStarWarsPersonExist(id), {
-    message: "Not found",
-  }),
+  id: z.string().refine(doesStarWarsPersonExist, "Not found"),
   //           ^ 🕵️‍♂️
 });
 
